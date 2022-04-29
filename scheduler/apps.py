@@ -1,8 +1,11 @@
-from __future__ import unicode_literals
+import logging
 
 from django.apps import AppConfig
 from django.db.models.functions import Now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
+
+
+_logger = logging.getLogger(__name__)
 
 
 class SchedulerConfig(AppConfig):
@@ -37,5 +40,7 @@ class SchedulerConfig(AppConfig):
 
     def reschedule_jobs(self, jobs):
         for job in jobs:
+            _logger.info(f"Checking job: {job}")
             if job.is_scheduled() is False:
+                _logger.info(f"Job {job} is not scheduled. Saving now.")
                 job.save()

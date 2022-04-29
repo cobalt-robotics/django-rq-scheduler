@@ -1,5 +1,5 @@
-from __future__ import unicode_literals
 import importlib
+import logging
 from datetime import timedelta
 
 import croniter
@@ -8,15 +8,16 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.templatetags.tz import utc
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 import django_rq
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
 
 
-@python_2_unicode_compatible
+_logger = logging.getLogger(__name__)
+
+
 class BaseJob(TimeStampedModel):
 
     name = models.CharField(_('name'), max_length=128, unique=True)
@@ -105,6 +106,7 @@ class BaseJob(TimeStampedModel):
             kwargs['timeout'] = self.timeout
         if self.result_ttl is not None:
             kwargs['result_ttl'] = self.result_ttl
+        _logger.info(f"Scheduling job {self}")
         job = self.scheduler().enqueue_at(
             self.schedule_time_utc(), self.callable_func(),
             **kwargs

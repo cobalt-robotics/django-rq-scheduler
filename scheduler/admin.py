@@ -1,8 +1,6 @@
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from scheduler.models import CronJob, RepeatableJob, ScheduledJob
 
@@ -10,13 +8,8 @@ from scheduler.models import CronJob, RepeatableJob, ScheduledJob
 QUEUES = [(key, key) for key in settings.RQ_QUEUES.keys()]
 
 
-class QueueMixin(object):
+class QueueMixin:
     actions = ['delete_model']
-
-    def get_actions(self, request):
-        actions = super(QueueMixin, self).get_actions(request)
-        del actions['delete_selected']
-        return actions
 
     def get_form(self, request, obj=None, **kwargs):
         queue_field = self.model._meta.get_field('queue')

@@ -1,3 +1,3 @@
-__version__ = '1.1.3'
+__version__ = '2.0.0'
 
 default_app_config = 'scheduler.apps.SchedulerConfig'
