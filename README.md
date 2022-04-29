@@ -4,30 +4,13 @@ A database backed job scheduler for Django RQ.
 
 ## Requirements
 
-Currently, when you pip install Django RQ Scheduler the following packages are also installed.
-
-* django >= 1.9
-* django-model-utils >= 2.4
-* django-rq >= 0.9.3 (Django RQ requires RQ >= 0.5.5)
-* rq-scheduler >= 0.6.0
-* pytz >= 2015.7
-* croniter >= 0.3.24
-
-Testing also requires:
-
-* factory_boy >= 2.6.1
-* psycopg2 >= 2.6.1
-
+See `setup.py` file.
 
 ## Usage
 
 ### Install
 
-Use pip to install:
-
-```
-pip install django-rq-scheduler
-```
+Install with Pip for GitHub.
 
 
 ### Update Django Settings
@@ -113,4 +96,3 @@ def count():
 ## Reporting issues or Features
 
 Please report issues via [GitHub Issues](https://github.com/istrategylabs/django-rq-scheduler/issues) .
-
