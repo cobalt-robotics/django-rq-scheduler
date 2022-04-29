@@ -8,7 +8,7 @@ from scheduler.models import CronJob, RepeatableJob, ScheduledJob
 QUEUES = [(key, key) for key in settings.RQ_QUEUES.keys()]
 
 
-class QueueMixin(object):
+class QueueMixin:
     actions = ['delete_model']
 
     def get_actions(self, request):
